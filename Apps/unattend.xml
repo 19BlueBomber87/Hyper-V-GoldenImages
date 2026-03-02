@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
+
+    <!-- SPECIALIZE PASS (CopyProfile must be here) -->
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-Shell-Setup"
+                   processorArchitecture="amd64"
+                   publicKeyToken="31bf3856ad364e35"
+                   language="neutral"
+                   versionScope="nonSxS">
+            <CopyProfile>true</CopyProfile>
+        </component>
+    </settings>
+
+    <!-- YOUR EXISTING OOBE PASS -->
     <settings pass="oobeSystem">
         <component name="Microsoft-Windows-Shell-Setup"
                    processorArchitecture="amd64"
@@ -8,11 +21,11 @@
                    versionScope="nonSxS"
                    xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
             <TimeZone>Alaskan Standard Time</TimeZone>
 
             <UserAccounts>
                 <LocalAccounts>
-                    <!-- First account: MegaMan (Admin) -->
                     <LocalAccount wcm:action="add">
                         <Password>
                             <Value>Taz14Spaz!@#</Value>
@@ -23,33 +36,25 @@
                         <DisplayName>Mega Man</DisplayName>
                     </LocalAccount>
 
-                    <!-- Second account: Rush (Standard user) -->
                     <LocalAccount wcm:action="add">
                         <Password>
-                            <Value>Taz14Spaz!@#</Value>  <!-- Change this to whatever password you want for Rush -->
+                            <Value>Taz14Spaz!@#</Value>
                             <PlainText>true</PlainText>
                         </Password>
                         <Name>Rush</Name>
-                        <Group>Users</Group>  <!-- Standard user group; remove if you want default behavior -->
+                        <Group>Users</Group>
                         <DisplayName>Rush</DisplayName>
                     </LocalAccount>
                 </LocalAccounts>
             </UserAccounts>
-            <FirstLogonCommands>
-                <SynchronousCommand wcm:action="add">
-                    <CommandLine>powershell.exe -ExecutionPolicy Bypass -Command "& { $prefixes = @('RobotMasterRumble', 'MegaManMultiverse', 'WilyFortressForge', 'DrLightDynasty', 'MegaBuster'); $randPrefix = Get-Random -InputObject $prefixes; $randNum = Get-Random -Minimum 0 -Maximum 10000; $newName = $randPrefix + "-" + $randNum.ToString("D4"); Rename-Computer -NewName $newName -Force -Restart }"</CommandLine>
-                    <Description>Set random name MMF/MMG-0000 to 9999 and reboot</Description>
-                    <Order>1</Order>
-                    <RequiresUserInput>false</RequiresUserInput>
-                </SynchronousCommand>
-            </FirstLogonCommands>
 
-            <!-- OOBE skips for minimal setup -->
             <OOBE>
                 <HideEULAPage>true</HideEULAPage>
                 <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
                 <ProtectYourPC>3</ProtectYourPC>
             </OOBE>
+
         </component>
     </settings>
+
 </unattend>

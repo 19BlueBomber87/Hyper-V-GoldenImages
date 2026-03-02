@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
 
-    <!-- GENERALIZE PASS – CopyProfile goes here -->
+    <!-- GENERALIZE PASS – empty or add other generalize settings if needed -->
     <settings pass="generalize">
         <component name="Microsoft-Windows-Shell-Setup"
                    processorArchitecture="amd64"
                    publicKeyToken="31bf3856ad364e35"
                    language="neutral"
                    versionScope="nonSxS">
-            <CopyProfile>true</CopyProfile>
+            <!-- Optional: Add generalize settings like OEMInformation if desired -->
         </component>
     </settings>
 
-    <!-- SPECIALIZE PASS – optional, but good to have if needed for other settings -->
+    <!-- SPECIALIZE PASS – CopyProfile goes here -->
     <settings pass="specialize">
         <component name="Microsoft-Windows-Shell-Setup"
                    processorArchitecture="amd64"
                    publicKeyToken="31bf3856ad364e35"
                    language="neutral"
                    versionScope="nonSxS">
-            <!-- Add other specialize settings here if needed (e.g. ComputerName, RegisteredOwner, etc.) -->
+            <CopyProfile>true</CopyProfile>
+            <!-- Optional: Add other specialize settings (e.g. ComputerName, TimeZone if not in oobeSystem, etc.) -->
         </component>
     </settings>
 
